@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\AdminRequest;
 use App\models\Category;
+use App\Helpers\MainHelper;
 
 class AdminController extends Controller
 {
@@ -24,7 +25,7 @@ class AdminController extends Controller
         $cate              = new Category;
         $cate->name        = $request->txtCatname;
         $cate->content     = $request->txtCatcontent;
-        $cate->cate_alias  = $request->txtCatalias;
+        $cate->cate_alias  = MainHelper::createAlias($request->txtCatalias);
         $cate->title       = $request->txtCattitle;
         $cate->description = $request->txtCatdes;
         $cate->parent_id   = $request->txtCatparent;

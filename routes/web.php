@@ -53,4 +53,10 @@
 		    Route::get('/add', 'AdminController@userADD')->name('admin.user.add');
 		    Route::get('/edit', 'AdminController@userEDIT')->name('admin.user.edit');
 	    });
+
+
 	});
+		    Route::get('/get-test',function(){
+	    	$test = "Đôi lúc ta muốn gom nhóm Regex lại cho dễ nhìn, việc này đơn giản ta chỉ cần đặt đoạn mã Regex bên trong cặp đóng và mở (). Khi sử dụng gom nhóm thì việc so khớp vẫn bình thường, tuy nhiên với kết quả về của biến \$matches thì sẽ có sự thay đổi và chi tiết thế nào thì ở phần Capturing Group dưới đây mình sẽ đề cập tới.....%%%%%%%%%%%%%%%%%%%%%%%%";
+	    	echo MainHelper::createAlias($test);
+	    });
