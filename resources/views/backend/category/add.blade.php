@@ -14,7 +14,6 @@
 	    </ol>        
 	@stop
 
-
 	@section ('admin.body_content')
 	<div class="animated fadeIn">
 	    <div class="row">
@@ -43,7 +42,7 @@
                     </button>
                 </div> 
                 @endif
-                <form action="{!! route('admin.category.add') !!}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <form method="post" enctype="multipart/form-data" class="form-horizontal">
                   {!! csrf_field() !!}
                   <div class="col-sm-12 col-md-6">
                        <div class="row form-group">
@@ -69,8 +68,8 @@
                             <div class="col-12 col-md-9">
                               <select name="txtCatparent" id="select" class="form-control">
                                 <option value="0">Please select</option>
-                                @if(!empty($parents))
-                                {!! MainHelper::cat_parent($parents) !!}
+                                @if(!empty($parent))
+                                {!! MainHelper::cat_parent($parent) !!}
                                 @endif
                               </select>
                             </div>

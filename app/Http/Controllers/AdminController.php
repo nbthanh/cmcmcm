@@ -2,6 +2,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 use App\Http\Requests\AdminRequest;
 use App\models\Category;
 use App\Helpers\MainHelper;
@@ -12,16 +14,17 @@ class AdminController extends Controller
     	return view('backend.home.index');
     }
     /* category */
-    public function categoryLIST(){
-    	return view('backend.category.list');
+    public function catLIST(){
+        $list = Category::paginate(2);
+    	return view('backend.category.list',compact('list'));
     }
 
-    public function categoryADD(){
-        $parents = Category::select('id','name','parent_id')->get()->toArray();
-    	return view('backend.category.add',compact('parents'));
+    public function catADD(){
+        $parent = Category::select('id','name','parent_id')->get()->toArray();
+    	return view('backend.category.add',compact('parent'));
     }
 
-    public function categoryPOSTADD(AdminRequest $request){
+    public function catPOSTADD(AdminRequest $request){
         $cate              = new Category;
         $cate->name        = $request->txtCatname;
         $cate->content     = $request->txtCatcontent;
@@ -31,15 +34,95 @@ class AdminController extends Controller
         $cate->parent_id   = $request->txtCatparent;
         $cate->cat_order   = $request->txtCatorder;
         $cate->save();
-        $message = 'Thêm danh mục thành công!';
         return redirect()->route('admin.category.add')->with([
             'flash_message' => 'Thêm thể loại thành công!!!! ^^'
         ]);
     }
 
-    public function categoryEDIT(){
-    	return view('backend.category.edit');
+    public function catEDIT($id){
+        $data = Category::find($id)->toArray();
+        $parent = Category::select('id','name','parent_id')->get()->toArray();
+    	return view('backend.category.edit',compact('data','parent','id'));
     }
+
+    public function catPOSTEDIT(Request $request){
+        $id = $request->id;
+        $error = array();
+
+        //Thể loại không được chọn chính mình làm Parent_id
+        if ($request->txtCatparent == $id) {
+            return redirect()->route('admin.category.edit',$id)->with([
+                'message_type'  => 'danger',
+                'flash_message' => 'Tính phá gì đó cu???'
+            ]);
+        }
+
+        //Thể loại không được chọn thể loại con làm parent_id
+        $parent = Category::select('id')->where('parent_id',$id)->get();
+
+        if (count($parent)>0) {
+            $parents = [];
+            foreach ($parent as $value) {
+                $parents[] = $value->id; 
+            }
+            if(in_array($request->txtCatparent,$parents)){
+                return redirect()->route('admin.category.edit',$id)->with([
+                    'message_type'  => 'danger',
+                    'flash_message' => 'Từ làm cha giờ xuống làm con luôn sao ???'
+                ]);
+            }
+        }
+
+        //validator form
+        $validator = Validator::make($request->all(),
+            [
+                'txtCatname'           => 'required',
+                'txtCatalias'          => 'required',
+                'txtCatorder'          => 'integer|min:0'
+            ],
+            [
+                'txtCatname.required'  => 'Vui lòng nhập tên thể loại',
+                'txtCatalias.required' => 'Url không được bỏ tróng',
+                'txtCatorder.integer'  => 'Nhập số dùm em',
+                'txtCatorder.min'      => 'Nhập số âm làm gì ?',
+            ]);
+
+        if (!empty($validator) && $validator->fails()) {
+           return redirect()->route('admin.category.edit',$id)->withErrors($validator);
+        }else {
+            $cate = Category::find($id);
+            $cate->name        = $request->txtCatname;
+            $cate->content     = $request->txtCatcontent;
+            $cate->cate_alias  = MainHelper::createAlias($request->txtCatalias);
+            $cate->title       = $request->txtCattitle;
+            $cate->description = $request->txtCatdes;
+            $cate->parent_id   = $request->txtCatparent;
+            $cate->cat_order   = $request->txtCatorder;
+            $cate->save();
+            return redirect()->route('admin.category.edit',$id)->with([
+                'message_type' => 'success',
+                'flash_message' => 'Sửa thể loại thành công!!!! ^^'
+            ]);
+        }
+    }
+
+    public function catDELETE($id){
+        $parent = Category::where('parent_id',$id)->count();
+        if ($parent == 0) {
+            $cat = Category::find($id);
+            $cat->delete();
+            return redirect()->route('admin.category.list')->with([
+                'message_type' => 'success',
+                'flash_message' => 'Bạn đã xóa thành công thể loại!!'
+            ]);
+        }else {
+            return redirect()->route('admin.category.list')->with([
+                'message_type' => 'danger',
+                'flash_message' => 'Thao tác không thành công, bạn phải xóa các thể loại con trước !!'
+            ]);
+        }
+    }
+
     /* \category */
 
     /* post */

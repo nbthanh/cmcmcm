@@ -12,15 +12,15 @@
     <link rel="apple-touch-icon" href="apple-icon.png">
     <link rel="shortcut icon" href="favicon.ico">
 
-    <link rel="stylesheet" href="{{ url('/public/backend/') }}/assets/css/normalize.css">
-    <link rel="stylesheet" href="{{ url('/public/backend/') }}/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ url('/public/backend/') }}/assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{ url('/public/backend/') }}/assets/css/themify-icons.css">
-    <link rel="stylesheet" href="{{ url('/public/backend/') }}/assets/css/flag-icon.min.css">
-    <link rel="stylesheet" href="{{ url('/public/backend/') }}/assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="{{ url('/backend/') }}/assets/css/normalize.css">
+    <link rel="stylesheet" href="{{ url('/backend/') }}/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url('/backend/') }}/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url('/backend/') }}/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="{{ url('/backend/') }}/assets/css/flag-icon.min.css">
+    <link rel="stylesheet" href="{{ url('/backend/') }}/assets/css/cs-skin-elastic.css">
     <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
-    <link rel="stylesheet" href="{{ url('/public/backend/') }}/assets/scss/style.css">
-    <link href="{{ url('/public/backend/') }}/assets/css/lib/vector-map/jqvmap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url('/backend/') }}/assets/scss/style.css">
+    <link href="{{ url('/backend/') }}/assets/css/lib/vector-map/jqvmap.min.css" rel="stylesheet">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
@@ -65,17 +65,17 @@
 
     <!-- Right Panel -->
 
-    <script src="{{ url('/public/backend/') }}/assets/js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="{{ url('/backend/') }}/assets/js/vendor/jquery-2.1.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-    <script src="{{ url('/public/backend/') }}/assets/js/plugins.js"></script>
-    <script src="{{ url('/public/backend/') }}/assets/js/main.js"></script>
-    <!-- <script src="{{ url('/public/backend/') }}/assets/js/lib/chart-js/Chart.bundle.js"></script> -->
-    <!-- <script src="{{ url('/public/backend/') }}/assets/js/dashboard.js"></script> -->
-   <!--  <script src="{{ url('/public/backend/') }}/assets/js/widgets.js"></script> -->
-    <!-- <script src="{{ url('/public/backend/') }}/assets/js/lib/vector-map/jquery.vmap.js"></script> -->
-    <!-- <script src="{{ url('/public/backend/') }}/assets/js/lib/vector-map/jquery.vmap.min.js"></script> -->
-    <!-- <script src="{{ url('/public/backend/') }}/assets/js/lib/vector-map/jquery.vmap.sampledata.js"></script>
-    <script src="{{ url('/public/backend/') }}/assets/js/lib/vector-map/country/jquery.vmap.world.js"></script> -->
+    <script src="{{ url('/backend/') }}/assets/js/plugins.js"></script>
+    <script src="{{ url('/backend/') }}/assets/js/main.js"></script>
+    <!-- <script src="{{ url('/backend/') }}/assets/js/lib/chart-js/Chart.bundle.js"></script> -->
+    <!-- <script src="{{ url('/backend/') }}/assets/js/dashboard.js"></script> -->
+   <!--  <script src="{{ url('/backend/') }}/assets/js/widgets.js"></script> -->
+    <!-- <script src="{{ url('/backend/') }}/assets/js/lib/vector-map/jquery.vmap.js"></script> -->
+    <!-- <script src="{{ url('/backend/') }}/assets/js/lib/vector-map/jquery.vmap.min.js"></script> -->
+    <!-- <script src="{{ url('/backend/') }}/assets/js/lib/vector-map/jquery.vmap.sampledata.js"></script>
+    <script src="{{ url('/backend/') }}/assets/js/lib/vector-map/country/jquery.vmap.world.js"></script> -->
     <script>
         ( function ( $ ) {
             /*"use strict";
@@ -93,8 +93,17 @@
                 normalizeFunction: 'polynomial'
             } );*/
             jQuery('.sufee-alert.alert-success').delay(3000).slideUp();
+            jQuery('.sufee-alert.alert-danger').delay(10000).slideUp();
         } )( jQuery );
-
+        var cmClass = {
+            confirm: function(msg){
+                if (window.confirm(msg)) {
+                    return true;
+                }else {
+                    return false;
+                }
+            }
+        }
     </script>
     @yield('admin.footer')
 </body>

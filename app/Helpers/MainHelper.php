@@ -11,19 +11,23 @@
 		 * @param  [Numberic] $parent [description]
 		 * @return [String]         [description]
 		 */
-		public static function cat_parent($data,$parent = 0,$str="-",$select = 0) {
+		public static function cat_parent($data,$parent = 0,$str="-",$select = 0,$curent = null) {
 			$rs = "";
 			foreach ($data as $item) {
 				$id = $item['id'];
 				$name = $item['name'];
+				
 				if ($parent == $item['parent_id']) {
 					if ($select != 0 && $id == $select) {
 						$rs .= '<option value="'.$id.'" selected>'.$str.$item['name'].'</option>';
 					}else {
-						$rs .= '<option value="'.$id.'">'.$str.$item['name'].'</option>';
+						if ($curent != $id) {
+							$rs .= '<option value="'.$id.'">'.$str.$item['name'].'</option>';
+						}
 					}
-					$rs .= self::cat_parent($data,$id,$str."-");
+					$rs .= self::cat_parent($data,$id,$str."-",null,$curent);
 				}
+
 			}
 			return $rs;
 		}
@@ -67,6 +71,33 @@
         	
         	$str = rtrim($str,"-");
 			return $str;
+		}
+
+		/*<div class="dataTables_paginate paging_simple_numbers" id="bootstrap-data-table_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="bootstrap-data-table_previous"><a href="#" aria-controls="bootstrap-data-table" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="bootstrap-data-table" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="bootstrap-data-table" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="bootstrap-data-table" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="bootstrap-data-table" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="bootstrap-data-table" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item "><a href="#" aria-controls="bootstrap-data-table" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="bootstrap-data-table_next"><a href="#" aria-controls="bootstrap-data-table" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul></div>*/
+		/**
+		 * [pagination description]
+		 * @param  array  $data [description]
+		 * @return [string]       [return html]
+		 * 
+		 */
+		public static function pagination($data = []){
+			$default       = [
+				'data'         => null,
+				'current_page' => 1,
+				'limit'		=> 10,
+				'total_page' => 1,
+				'total_record' => 1,
+				'html'         => [
+					'html_start'   => '<div class="dataTables_paginate paging_simple_numbers" id="bootstrap-data-table_paginate">',
+					'ul_start'     => '<ul class="pagination">',
+					'ul_end'       => '</ul>',
+					'li_start'     => '<li class="paginate_button page-item ">',
+					'li_end'       => '</li>',
+					'active'       => 'active'
+				]
+			];
+
+			
 		}
 	}
 ?>
