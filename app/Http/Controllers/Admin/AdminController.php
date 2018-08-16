@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -7,15 +7,20 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\AdminRequest;
 use App\models\Category;
 use App\Helpers\MainHelper;
+use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
     public function index(){
-    	return view('backend.home.index');
+    	return view('backend.home.index'); 
     }
+
     /* category */
-    public function catLIST(){
-        $list = Category::paginate(2);
+    public function catLIST(Request $request){
+        
+        $p_limit = MainHelper::page_limit($request);
+
+        $list = Category::orderBy('cat_order','ASC')->paginate($p_limit);
     	return view('backend.category.list',compact('list'));
     }
 

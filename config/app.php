@@ -147,6 +147,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+
         /*
          * Package Service Providers...
          */
@@ -160,7 +161,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
-
+        Spatie\PaginateRoute\PaginateRouteServiceProvider::class,
     ],
 
     /*
@@ -209,6 +210,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'MainHelper' => App\Helpers\MainHelper::class,
+        'PaginateRoute' => Spatie\PaginateRoute\PaginateRouteFacade::class,
     ],
 
 ];

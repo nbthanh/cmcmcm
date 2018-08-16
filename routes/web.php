@@ -11,7 +11,14 @@
 |
 */
 
-Route::group(['prefix' => 'admin'], function() {
+
+
+Route::group(['prefix' => '', 'namespace' => 'Auth'], function() {
+	Route::post('/login', 'AuthController@auth_login')->name('admin.auth.login');
+	Route::get('/login', 'AuthController@auth_login')->name('admin.auth.login');
+});
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
     Route::get('/', 'AdminController@index');
 
     Route::group(['prefix' => 'category'], function() {
@@ -19,7 +26,11 @@ Route::group(['prefix' => 'admin'], function() {
 	    	return redirect()->route('admin.category.list');
 	    });
 
-		Route::get('/list/', 'AdminController@catLIST')->name('admin.category.list');
+    	//custom paginate => domain.com/page/1
+		Route::paginate('/list', [ 
+			'as' => 'admin.category.list', 
+			'uses' => 'AdminController@catLIST' 
+		]);
 		
 		Route::post('/add/', 'AdminController@catPOSTADD')->name('admin.category.postadd');
 		Route::get('/add/', 'AdminController@catADD')->name('admin.category.add');
@@ -67,3 +78,6 @@ Route::get('/get-test',function(){
 	$test = "Đôi lúc ta muốn gom nhóm Regex lại cho dễ nhìn, việc này đơn giản ta chỉ cần đặt đoạn mã Regex bên trong cặp đóng và mở (). Khi sử dụng gom nhóm thì việc so khớp vẫn bình thường, tuy nhiên với kết quả về của biến \$matches thì sẽ có sự thay đổi và chi tiết thế nào thì ở phần Capturing Group dưới đây mình sẽ đề cập tới.....%%%%%%%%%%%%%%%%%%%%%%%%";
 	echo MainHelper::createAlias($test);
 });
+//Auth::routes();
+
+//Route::get('/home', 'HomeController@index')->name('home');

@@ -55,6 +55,24 @@
 		}
 
 		/**
+		 * [page_limit Giới hạn hiển thị item per page tùy chọn]
+		 * @param  [integer] $limit [Láy dử liệu là số từ get] example ?limit=10
+		 * @return [integer]        [trả về số page đã chọn và được lưu vào session các lần sau sử dụng]
+		 */
+		public static function page_limit($request){
+			if (is_numeric($request->limit)) {
+	            $request->session()->put('p_limit', $request->limit);
+	            $p_limit = $request->limit;
+	        }else if ($request->session()->exists('p_limit')) {
+	            $p_limit = $request->session()->get('p_limit');
+	        }else {
+	            $p_limit = 10;
+	        }
+
+	       	return $p_limit;
+		}
+
+		/**
 		 * [createAlias Hàm tạo alias]
 		 * @param  [string] $str [Nhập vào chuổi bất kì] nhap-vao-chuoi-bat-ki	
 		 * @return [string]      [Trả về chuổi alias] -> tra-ve-chuoi-alias
