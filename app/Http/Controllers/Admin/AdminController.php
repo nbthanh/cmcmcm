@@ -93,7 +93,7 @@ class AdminController extends Controller
             ]);
 
         if (!empty($validator) && $validator->fails()) {
-           return redirect()->route('admin.category.edit',$id)->withErrors($validator);
+           return redirect()->route('admin.category.edit',$id)->withErrors($validator); //check and edit lai back()
         }else {
             $cate = Category::find($id);
             $cate->name        = $request->txtCatname;

@@ -13,13 +13,15 @@
 
 
 
-Route::group(['prefix' => '', 'namespace' => 'Auth'], function() {
+Route::group(['prefix' => 'admin', 'namespace' => 'Auth'], function() {
 	Route::post('/login', 'AuthController@auth_login')->name('admin.auth.login');
 	Route::get('/login', 'AuthController@auth_login')->name('admin.auth.login');
+
+	Route::get('/logout', 'AuthController@logout')->name('admin.auth.logout');
 });
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
-    Route::get('/', 'AdminController@index');
+    Route::get('/', 'AdminController@index')->name('admin.dashboard');
 
     Route::group(['prefix' => 'category'], function() {
     	Route::get('/', function(){

@@ -13,15 +13,16 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'user_name'=>'admin',
-                'user_pass'=> bcrypt('123456789'),
-                'user_nicename'=>'admin',
-                'user_email'=>'admin@thanhne.com',
-                'user_activation_key'=>'',
-                'user_status'=>'1',
-                'display_name' => 'Super Admin',
+                'user_name'           =>'admin3',
+                'password'            => Hash::make('123456789'),
+                'user_nicename'       =>'admin3',
+                'user_email'          =>'admin@thanhne.com2',
+                'user_activation_key' =>'',
+                'user_status'         =>'1',
+                'display_name'        => 'Super Admin',
+                'user_avatar'         => '',
             ]
         ]);
-        factory(App\User::class,100)->create();
+        //factory(App\User::class,100)->create();
     }
 }

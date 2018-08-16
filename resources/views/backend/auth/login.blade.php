@@ -34,11 +34,23 @@
                     </a>
                 </div>
                 <div class="login-form">
+                    @if($errors->any() || Session::has('flash_message'))
+                        <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                            <p><span class="badge badge-pill badge-danger">Error !!!</span></p>
+                            {!! Session::get('flash_message')  !!}
+                            @foreach($errors->all() as $error)
+                                <p>{!! $error !!}</p>
+                            @endforeach
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                            </button>
+                        </div> 
+                    @endif
                     <form method="POST">
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <label>Email address</label>
-                            <input type="email" name="txtEmail" class="form-control" placeholder="Email">
+                            <label>User Name</label>
+                            <input type="text" name="txtUsername" class="form-control" placeholder="User Name">
                         </div>
                         <div class="form-group">
                             <label>Password</label>
