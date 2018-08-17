@@ -77,25 +77,6 @@
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-3">
-                                <label for="text-input" class=" form-control-label">Title Meta</label>
-                            </div>
-                            <div class="col-12 col-md-9">
-                                <input type="text" id="text-input" name="txtCattitle" placeholder="Nhập title" class="form-control" value="{!! old('txtCattitle',isset($data['title']) ? $data['title'] : null ) !!}">
-                                <small class="form-text text-muted">Mặc định gióng tên</small>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-3">
-                                <label for="textarea-input" class=" form-control-label">Description Meta</label>
-                            </div>
-                            <div class="col-12 col-md-9">
-                              <textarea name="txtCatdes" id="catDes" rows="9" placeholder="Description..." class="form-control">{!! old('txtCatdes',isset($data['description']) ? $data['description'] : null ) !!}</textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div class="row form-group">
-                            <div class="col col-md-3">
                                 <label for="text-input" class=" form-control-label">Thứ tự</label>
                             </div>
                             <div class="col-12 col-md-9">
@@ -103,12 +84,37 @@
                                 <small class="form-text text-muted">Mặc định là 0</small>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
                         <div class="row form-group">
-                            <div class="col col-md-3">
+                            <div class="col col-md-2">
+                                <label for="text-input" class=" form-control-label">Title Meta</label>
+                            </div>
+                            <div class="col-12 col-md-10">
+                                <input type="text" id="text-input" name="txtCattitle" placeholder="Nhập title" class="form-control" value="{!! old('txtCattitle',isset($data['title']) ? $data['title'] : NULL ) !!}">
+                                <small class="form-text text-muted">Mặc định gióng tên</small>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-2">
+                                <label for="textarea-input" class=" form-control-label">Description Meta</label>
+                            </div>
+                            <div class="col-12 col-md-10">
+                              <textarea name="txtCatdes" id="catDes" rows="9" placeholder="Description..." class="form-control">{!! old('txtCatdes',isset($data['description']) ? $data['description'] : NULL ) !!}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="row form-group">
+                            <div class="col col-md-1">
                                 <label for="textarea-input" class=" form-control-label">Content</label>
                             </div>
-                            <div class="col-12 col-md-9">
-                              <textarea name="txtCatcontent" id="summernote" rows="9" placeholder="Content..." class="form-control">{!! old('txtCatcontent',isset($data['content']) ? $data['content'] : 0 ) !!}</textarea>
+                            <div class="col-12 col-md-11">
+                              <textarea name="txtCatcontent" id="catContent" rows="9" placeholder="Content..." class="form-control">{!! old('txtCatcontent',isset($data['content']) ? $data['content'] : NULL ) !!}</textarea>
+                              <script type="text/javascript">
+                                var editor = CKEDITOR.replace( 'catContent' );
+                                CKFinder.setupCKEditor( editor );
+                              </script>
                             </div>
                         </div>
                     </div>

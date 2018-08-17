@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\models\Category;
 
 class AdminRequest extends FormRequest
 {
@@ -11,9 +12,9 @@ class AdminRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(Request $request)
     {
-        return true;
+        
     }
 
     /**
@@ -25,9 +26,9 @@ class AdminRequest extends FormRequest
     {
         return [
             'txtCatname'   => 'required|unique:categories,name',
+            'txtCatalias'  => 'required',
             'txtCatparent' => 'integer|min:0',
             'txtCatorder'  => 'integer|min:0',
-            'txtCatalias'  => 'required|unique:categories,cate_alias'
         ];
     }
 
@@ -39,8 +40,7 @@ class AdminRequest extends FormRequest
               'txtCatparent.min'     => 'Parent error',
               'txtCatorder.integer'  => 'Thứ tự phải là số nguyên',     
               'txtCatorder.min'      => 'Thứ tự phải dương',
-              'txtCatalias.required' => 'Vui lòng nhập url',
-              'txtCatalias.unique'   => 'Tên url đã tồn tại',     
+              'txtCatalias.required' => 'Vui lòng nhập url'
         ];
     }
 }

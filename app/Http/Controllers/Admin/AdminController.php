@@ -8,9 +8,22 @@ use App\Http\Requests\AdminRequest;
 use App\models\Category;
 use App\Helpers\MainHelper;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+    public function __construct(){
+        $except = ['auth_login'];
+        $this->middleware(function($request, $next){
+            if (Auth::check()) {
+                if (Auth::user()->user_status == 1) {
+                    return $next($request);
+                }
+            }
+            return redirect()->route('admin.auth.login');
+        })->except($except);
+    }
+
     public function index(){
     	return view('backend.home.index'); 
     }
@@ -81,8 +94,8 @@ class AdminController extends Controller
         //validator form
         $validator = Validator::make($request->all(),
             [
-                'txtCatname'           => 'required',
-                'txtCatalias'          => 'required',
+                'txtCatname'           => 'required|unique:categories,name',
+                'txtCatalias'          => 'required|unique:categories,cate_alias',
                 'txtCatorder'          => 'integer|min:0'
             ],
             [
@@ -90,7 +103,8 @@ class AdminController extends Controller
                 'txtCatalias.required' => 'Url không được bỏ tróng',
                 'txtCatorder.integer'  => 'Nhập số dùm em',
                 'txtCatorder.min'      => 'Nhập số âm làm gì ?',
-            ]);
+            ]
+        );
 
         if (!empty($validator) && $validator->fails()) {
            return redirect()->route('admin.category.edit',$id)->withErrors($validator); //check and edit lai back()

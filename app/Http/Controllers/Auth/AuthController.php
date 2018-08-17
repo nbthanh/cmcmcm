@@ -9,9 +9,6 @@ use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
 {
-    public function __construct(){
-        
-    }
 
     public function auth_login(Request $request){
     	if (Auth::check()) {
@@ -35,11 +32,12 @@ class AuthController extends Controller
             if (!empty($validator) && $validator->fails()) {
                 return back()->withErrors($validator);
             }else {
+                $remember = $request->txtRemember;
                 $credentials = [
                     'user_name' => $data['txtUsername'],
-                    'password' => $data['txtPassword']
+                    'password' => $data['txtPassword'],
                 ];
-                if (Auth::attempt($credentials)) {
+                if (Auth::attempt($credentials,$remember)) {
                     if (Auth::user()->user_status == 1) {
                         return redirect()->route('admin.dashboard');
                     }else {
