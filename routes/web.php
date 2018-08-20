@@ -29,29 +29,30 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 	    });
 
     	//custom paginate => domain.com/page/1
-		Route::paginate('/list', [ 
+		Route::paginate('/list', [
 			'as' => 'admin.category.list', 
 			'uses' => 'AdminController@catLIST' 
 		]);
-		
-		Route::post('/add/', 'AdminController@catPOSTADD')->name('admin.category.postadd');
-		Route::get('/add/', 'AdminController@catADD')->name('admin.category.add');
-		
-		Route::post('/edit/{id}', 'AdminController@catPOSTEDIT')->name('admin.category.postedit');
-		Route::get('/edit/{id}/', 'AdminController@catEDIT')->name('admin.category.edit');
-		
-		Route::get('/delete/{id}/', 'AdminController@catDELETE')->name('admin.category.delete');
 
-	   // Route::post();
+		// sử dụng make:request nên không gọp get và post vào chung dc
+		Route::post('/add', 'AdminController@catPostadd')->name('admin.category.postadd');
+		Route::get('/add', 'AdminController@catAdd')->name('admin.category.add');
+
+		// gop get va post vào chung không sử dụng make:request [name]
+		Route::match(['get', 'post'],'/edit/{id}', 'AdminController@cateEdit')->name('admin.category.edit');
+		
+		Route::get('/delete/{id}', 'AdminController@catDelete')->name('admin.category.delete');
     });
 
     Route::group(['prefix' => 'post'], function(){
     	Route::get('/', function(){
 	    	return redirect()->route('admin.post.list');
 	    });
-	    Route::get('/list', 'AdminController@postLIST')->name('admin.post.list');
-	    Route::get('/add', 'AdminController@postADD')->name('admin.post.add');
-	    Route::get('/edit', 'AdminController@postEDIT')->name('admin.post.edit');
+	    Route::get('/list', 'AdminController@postList')->name('admin.post.list');
+	    Route::match(['get','post'],'/add', 'AdminController@postAdd')->name('admin.post.add');
+
+
+	    Route::get('/edit', 'AdminController@postEdit')->name('admin.post.edit');
     });
 
 

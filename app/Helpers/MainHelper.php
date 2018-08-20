@@ -3,8 +3,23 @@
 	 *  Helpers
 	 */
 	namespace App\Helpers;
+	use App\models\Category;
 	class MainHelper
 	{
+
+		public static function cate_list(){
+			$cats = Category::all();
+			$rs = "";
+			foreach ($cats as $value) {
+				$rs .= 	'<div class="checkbox col-md-12 col-lg-6">
+							<label for="checkbox'.$value->id.'" class="form-check-label ">
+								<input type="checkbox" name="catids[]" value="'.$value->id.'" class="form-check-input"> '.$value->name.'
+							</label>
+						</div>';
+			}
+			echo $rs;
+		}
+
 		/**
 		 * [cat_parent description]
 		 * @param  [Array] $data   [description]

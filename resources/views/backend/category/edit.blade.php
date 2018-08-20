@@ -61,7 +61,7 @@
                             </div>
                             <div class="col-12 col-md-9">
                                 <input type="text" id="text-input" name="txtCatalias" placeholder="Nhập url thể loại" class="form-control" value="{!! old('txtCatalias',isset($data['cate_alias']) ? $data['cate_alias'] : null) !!}">
-                                <small class="form-text text-muted">Mặc định gióng tên</small>
+                                <small class="form-text text-muted">Mặc định giống tên</small>
                             </div>
                         </div>
                          <div class="row form-group">
@@ -92,7 +92,7 @@
                             </div>
                             <div class="col-12 col-md-10">
                                 <input type="text" id="text-input" name="txtCattitle" placeholder="Nhập title" class="form-control" value="{!! old('txtCattitle',isset($data['title']) ? $data['title'] : NULL ) !!}">
-                                <small class="form-text text-muted">Mặc định gióng tên</small>
+                                <small class="form-text text-muted">Mặc định giống tên</small>
                             </div>
                         </div>
                         <div class="row form-group">

@@ -24,7 +24,7 @@
                 </div>
                 <div class="card-body card-block">
                     @if(Session::has('flash_message'))
-                    <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                    <div class="sufee-alert alert with-close alert-{!! Session::get('message_type') !!} alert-dismissible fade show">
                         {!! Session::get('flash_message')  !!}
                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">×</span>
@@ -56,11 +56,11 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Alias</label>
+                                    <label for="text-input" class=" form-control-label">Alias (URL)</label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <input type="text" id="text-input" name="txtCatalias" placeholder="Nhập url thể loại" class="form-control" value="{!! old('txtCatalias') !!}">
-                                    <small class="form-text text-muted">Mặc định gióng tên</small>
+                                    <small class="form-text text-muted">Mặc định giống tên</small>
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="col-12 col-md-10">
                                     <input type="text" id="text-input" name="txtCattitle" placeholder="Nhập title" class="form-control" value="{!! old('txtCattitle') !!}">
-                                    <small class="form-text text-muted">Mặc định gióng tên</small>
+                                    <small class="form-text text-muted">Mặc định giống tên</small>
                                 </div>
                             </div>
                             <div class="row form-group">

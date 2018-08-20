@@ -12,9 +12,9 @@ class AdminRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize(Request $request)
+    public function authorize()
     {
-        
+        return true;
     }
 
     /**
@@ -34,13 +34,13 @@ class AdminRequest extends FormRequest
 
     public function messages() {
         return [
-              'txtCatname.required'  => 'Vui lòng nhập tên thể loại',
-              'txtCatname.unique'    => 'Tên thể loại đã tồn tại',
-              'txtCatparent.integer' => 'Parent error',     
-              'txtCatparent.min'     => 'Parent error',
-              'txtCatorder.integer'  => 'Thứ tự phải là số nguyên',     
-              'txtCatorder.min'      => 'Thứ tự phải dương',
-              'txtCatalias.required' => 'Vui lòng nhập url'
+            'txtCatname.required'  => 'Vui lòng nhập tên thể loại',
+            'txtCatname.unique'    => 'Tên thể loại đã tồn tại',
+            'txtCatparent.integer' => 'Parent error',     
+            'txtCatparent.min'     => 'Parent error',
+            'txtCatorder.integer'  => 'Thứ tự phải là số nguyên',     
+            'txtCatorder.min'      => 'Thứ tự phải dương',
+            'txtCatalias.required' => 'Vui lòng nhập url'
         ];
     }
 }

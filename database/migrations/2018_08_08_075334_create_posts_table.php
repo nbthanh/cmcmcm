@@ -22,7 +22,7 @@ class CreatePostsTable extends Migration
             $table->string('post_alias')->unique();
 
             $table->integer('comment_count')->default(0);
-            $table->datetime('post_modified');
+           //$table->datetime('post_modified');
 
             $table->index(['post_status','post_alias','author_id','user_id']);
 
