@@ -31,7 +31,7 @@ class AdminController extends Controller
     }
 
     /* category */
-    public function catLIST(Request $request){
+    public function catList(Request $request){
         //tùy chỉnh số bài viết hiể thị trên 1 trang
         $p_limit = MainHelper::page_limit($request);
         $list = Category::orderBy('cat_order','ASC')->paginate($p_limit);
@@ -165,30 +165,27 @@ class AdminController extends Controller
             $post              = new Post;
 
             $rules = [
-                'txtCatname'           => 'required',
-                'txtCatalias'          => 'required',
-                'txtCatorder'          => 'integer|min:0',
-                'txtCatparent'         => 'required|not_in:'.implode(',', $parents),
+                'txtPostname'    => 'required|unique:posts,post_name',
+                'txtPostalias'   => 'unique:posts,post_alias',
+                'txtPostcontent' => 'required',
+                'catids'         => 'required|array'
             ];
 
             $messages = [
-                'txtCatname.required'       => 'Vui lòng nhập tên thể loại',
-                'txtCatalias.required'      => 'Url không được bỏ tróng',
-                'txtCatorder.integer'       => 'Nhập số dùm em',
-                'txtCatorder.min'           => 'Nhập số âm làm gì ?',
-                'txtCatparent.not_in'       => 'Có gì đó sai sai về logic ở mục parent'
+                'txtPostname.required'    => 'Vui lòng nhập tên bài viết',
+                'txtPostname.unique'      => 'Tên bài viết đã tồn tại, nhập tên khác',
+                'txtPostcontent.required' => 'Vui lòng nhập nội dung bài viết',
+                'txtPostalias.unique'     => 'Alias (Url) đã tồn tại',
+                'catids.required'         => 'Vui lòng chọn thể loại',
+                'catids.array'            => 'Phá gì đó man'
             ];
 
-            /*Check thể loại đã tồn tại và ngoại trừ chính nó*/
-            if ($request->txtPostname !== $cate->name) { // ngoại trừ chính nó
-                $rules['txtCatname']           = 'unique:categories,name';
-                $messages['txtCatname.unique'] = 'Tên thể loại đã tồn tại';
-            }
-
-            /*Check alias đã tồn tại*/
-            if (MainHelper::createAlias($request->txtCatalias) !== $cate->cate_alias) { //ngoại trừ chính nó
-                $rules['txtCatalias']           = 'unique:categories,cate_alias';
-                $messages['txtCatalias.unique'] = 'URL đã tồn tại';
+            if (!$request->thumbFile && !$request->txtMetathumb) {
+                $rules['txtMetathumb'] = 'required';
+                $messages['txtMetathumb.required'] = 'Vui lòng cập nhật thumbnail';
+            }else {
+                $rules['thumbFile'] = 'mimes:jpeg,jpg,png,gif';
+                $messages['thumbFile.mimes'] = 'Thumbnail chỉ chấp nhận dạng: jpeg, jpg, gif,png';
             }
 
             $validator = Validator::make($request->all(),$rules,$messages);

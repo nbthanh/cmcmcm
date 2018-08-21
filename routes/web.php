@@ -31,7 +31,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
     	//custom paginate => domain.com/page/1
 		Route::paginate('/list', [
 			'as' => 'admin.category.list', 
-			'uses' => 'AdminController@catLIST' 
+			'uses' => 'AdminController@catList' 
 		]);
 
 		// sử dụng make:request nên không gọp get và post vào chung dc

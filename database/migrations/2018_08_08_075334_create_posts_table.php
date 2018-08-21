@@ -15,7 +15,7 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->text('post_title');
+            $table->text('post_name');
             $table->longText('post_content');
 
             $table->string('post_status',20)->default('public');
@@ -26,9 +26,7 @@ class CreatePostsTable extends Migration
 
             $table->index(['post_status','post_alias','author_id','user_id']);
 
-            $table->integer('author_id')->unsigned();
             $table->integer('user_id')->unsigned()->default(0);
-            $table->integer('cat_id')->unsigned();
             $table->timestamps();
         });
     }

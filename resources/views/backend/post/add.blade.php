@@ -53,13 +53,13 @@
                                     <input type="text" id="text-input" name="txtPostname" placeholder="Nhập tên truyện" class="form-control" value="{!! old('txtPostname') !!}">
                                     <small class="form-text text-muted">Nhập tên truyện vào ô bên trên</small>
                                 </div>
-                            </div>
+                            </div>  
                             <div class="row form-group">
                                 <div class="col-12 col-md-3">
                                     <label for="text-input" class=" form-control-label">Tên gọi khác</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <input type="text" id="text-input" name="txtPostothername" placeholder="Tên gọi khác" class="form-control" value="{!! old('txtPostothername') !!}">
+                                    <input type="text" id="text-input" name="txtMeta_othername" placeholder="Tên gọi khác" class="form-control" value="{!! old('txtMeta_othername') !!}">
                                     <small class="form-text text-muted">Nhập tên gọi khác của truyện vào ô bên trên mặc định rổng</small>
                                 </div>
                             </div>
@@ -87,7 +87,7 @@
                                     <label for="text-input" class=" form-control-label">Tên tác giả</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <input type="text" id="text-input" name="txtPostauthor" placeholder="Nhập tên tác giả" class="form-control" value="{!! old('txtPostauthor') !!}">
+                                    <input type="text" id="text-input" name="txtMetaauthor" placeholder="Nhập tên tác giả" class="form-control" value="{!! old('txtMetaauthor') !!}">
                                     <small class="form-text text-muted">Tên tác giả cách nhau dấu phẩy (abc, bdc..)</small>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                                     <label for="text-input" class=" form-control-label">Tình trạng</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <input type="text" id="text-input" name="txtPoststt" placeholder="Nhập tình trạng" class="form-control" value="{!! old('txtPoststt') !!}">
+                                    <input type="text" id="text-input" name="txtMetastt" placeholder="Nhập tình trạng" class="form-control" value="{!! old('txtMetastt') !!}">
                                     <small class="form-text text-muted">Tình trạng (15/20, FULL, updating..)</small>
                                 </div>
                             </div>
@@ -105,7 +105,7 @@
                                     <label for="text-input" class=" form-control-label">Nguồn</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <input type="text" id="text-input" name="txtPostsrc" placeholder="Nhập nguồn truyện" class="form-control" value="{!! old('txtPostsrc') !!}">
+                                    <input type="text" id="text-input" name="txtMetasrc" placeholder="Nhập nguồn truyện" class="form-control" value="{!! old('txtMetasrc') !!}">
                                     <small class="form-text text-muted">Nguồn từ: (webtruyen, nettruyen, tangthuvien....)</small>
                                 </div>
                             </div>
@@ -116,7 +116,7 @@
                                 <div class="col-12 col-md-10">
                                     <input type="file" id="file-input" name="thumbFile" class="form-control-file" />
                                     &nbsp;
-                                    <input type="text" id="text-input" name="thumbUrl" placeholder="Nhập thumbnail url" class="form-control" />
+                                    <input type="text" id="text-input" name="txtMetathumb" placeholder="Nhập thumbnail url" class="form-control" value="{!! old('txtMetathumb') !!}" />
                                     <small class="form-text text-muted">Upload thumbnail hoặc sử dụng URL</small>
                                 </div>
                             </div>
@@ -125,7 +125,7 @@
                                     <label for="text-input" class=" form-control-label">Title</label>
                                 </div>
                                 <div class="col-12 col-md-10">
-                                    <input type="text" id="text-input" name="txtPosttitle" placeholder="Nhập title" class="form-control" value="{!! old('txtPosttitle') !!}">
+                                    <input type="text" id="text-input" name="txtMetatitle" placeholder="Nhập title" class="form-control" value="{!! old('txtMetatitle') !!}">
                                     <small class="form-text text-muted">Mặc định giống tên</small>
                                 </div>
                             </div>
@@ -134,7 +134,37 @@
                                     <label for="textarea-input" class=" form-control-label">Description</label>
                                 </div>
                                 <div class="col-12 col-md-10">
-                                  <textarea name="txtPostdes" id="postDes" rows="9" placeholder="Description..." class="form-control">{!! old('txtPostdes') !!}</textarea>
+                                  <textarea name="txtMetades" id="postDes" rows="9" placeholder="Description..." class="form-control">{!! old('txtMetades') !!}</textarea>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-sm-2"><label for="txtMonth" class=" form-control-label">Schedule</label></div>
+                                <div class="col-12 col-sm-10">
+                                    <div class="pull-left">
+                                        <select name="txtMonth" id="txtMonth" class="form-control-sm form-control">
+                                            <option value="0">Please select</option>
+                                            <option value="1">Option #1</option>
+                                            <option value="2">Option #2</option>
+                                            <option value="3">Option #3</option>
+                                            <option value="4">Option #4</option>
+                                            <option value="5">Option #5</option>
+                                        </select>
+                                    </div>
+                                    <div class="pull-left">
+                                        <input type="text" id="text-input" name="txtDD" class="input-sm form-control-sm form-control" size="2" value="{!! date('d') !!}" />
+                                    </div>
+                                    <div class="pull-left">
+                                        <input type="text" id="text-input" name="txtYYYY" class="input-sm form-control-sm form-control" size="2" value="{{ date('Y') }}" />
+                                    </div>
+                                    <div class="pull-left">
+                                        <input type="text" id="text-input" name="txtHH" class="input-sm form-control-sm form-control" size="2" value="{!! date('H') !!}" />
+                                    </div>
+                                    <div class="pull-left">
+                                        <input type="text" id="text-input" name="txtII" class="input-sm form-control-sm form-control" size="2" value="{!! date('i') !!}" />
+                                    </div>
+                                    <div class="pull-left">
+                                        <button class="btn btn-danger btn-sm">OK</button>&nbsp;<a href="#">Cancel</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -144,7 +174,7 @@
                                     <label for="textarea-input" class=" form-control-label">Content</label>
                                 </div>
                                 <div class="col-12 col-md-11">
-                                  <textarea name="txtPostcontent" id="postContent" rows="9" placeholder="Content..." class="form-control">{!! old('txtCatcontent') !!}</textarea>
+                                  <textarea name="txtPostcontent" id="postContent" rows="9" placeholder="Content..." class="form-control">{!! old('txtPostcontent') !!}</textarea>
                                   <script type="text/javascript">
                                     var editor = CKEDITOR.replace( 'postContent' );
                                     CKFinder.setupCKEditor( editor );

@@ -12,6 +12,6 @@ class Category extends Model
 	public $timestamps = false;
 
 	public function posts(){
-		
+		return $this->belongsToMany('App\models\Post', 'cate_post', 'cate_id', 'post_id');
 	}
 }
