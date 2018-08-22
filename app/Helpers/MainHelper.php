@@ -3,10 +3,10 @@
 	 *  Helpers
 	 */
 	namespace App\Helpers;
-	use App\models\Category;
+	use App\Models\Category;
+
 	class MainHelper
 	{
-
 		public static function cate_list(){
 			$cats = Category::all();
 			$rs = "";
@@ -131,6 +131,47 @@
 			];
 
 			
+		}
+
+
+		/**
+		 * [unslash Trả về chuổi không có dấu slash]
+		 * @param  [string] $value [description]
+		 * @return [string]        [description]
+		 */
+		public static function unslash( $value ) {
+	        return self::stripslashes_deep( $value );
+		}
+
+		public static function stripslashes_deep( $value ) {
+	        return self::map_deep( $value,  'stripslashes_from_strings_only' );
+		}
+
+		public static function stripslashes_from_strings_only( $value ) {
+		    return is_string( $value ) ? stripslashes( $value ) : $value;
+		}
+
+		/**
+		 * [map_deep Để chắc chắn dử liệu đưa vào không phải là Array hay Object]
+		 * @param  [type] $value    [description]
+		 * @param  [type] $callback [description]
+		 * @return [type]           [description]
+		 */
+		public static function map_deep( $value, $callback ) {
+		    if ( is_array( $value ) ) {
+		        foreach ( $value as $index => $item ) {
+		            $value[ $index ] = self::map_deep( $item, $callback );
+		        }
+		    } elseif ( is_object( $value ) ) {
+		        $object_vars = get_object_vars( $value );
+		        foreach ( $object_vars as $property_name => $property_value ) {
+		            $value->$property_name = self::map_deep( $property_value, $callback );
+		        }
+		    } else {
+		        $value = call_user_func( 'self::'.$callback, $value );
+		    }
+		 
+		    return $value;
 		}
 	}
 ?>

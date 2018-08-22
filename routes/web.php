@@ -78,8 +78,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 });
 
 Route::get('/get-test',function(){
-	$test = "Đôi lúc ta muốn gom nhóm Regex lại cho dễ nhìn, việc này đơn giản ta chỉ cần đặt đoạn mã Regex bên trong cặp đóng và mở (). Khi sử dụng gom nhóm thì việc so khớp vẫn bình thường, tuy nhiên với kết quả về của biến \$matches thì sẽ có sự thay đổi và chi tiết thế nào thì ở phần Capturing Group dưới đây mình sẽ đề cập tới.....%%%%%%%%%%%%%%%%%%%%%%%%";
-	echo MainHelper::createAlias($test);
+	$test = "Đ'ôi lúc t'a muốn gom n\'hó\'m R\'egex lạ\'i c\'ho dễ nhìn, việc này đơn giản ta chỉ cần đặt đoạn mã Regex bên trong cặp đóng và mở (). Khi sử dụng gom nhóm thì việc so khớp vẫn bình thường, tuy nhiên với kết quả về của biến \$matches thì sẽ có sự thay đổi và chi tiết thế nào thì ở phần Capturing Group dưới đây mình sẽ đề cập tới.....%%%%%%%%%%%%%%%%%%%%%%%%";
+	echo MainHelper::unslash($test);
 });
 //Auth::routes();
 

@@ -5,8 +5,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 use App\Http\Requests\AdminRequest;
-use App\models\Category;
-use App\models\Post;
+use App\Models\Category;
+use App\Models\Post;
+use App\Models\Postmeta;
 use App\Helpers\MainHelper;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -162,7 +163,7 @@ class AdminController extends Controller
      */
     public function postAdd(Request $request){
         if ($request->post()) {
-            $post              = new Post;
+           
 
             $rules = [
                 'txtPostname'    => 'required|unique:posts,post_name',
@@ -192,7 +193,28 @@ class AdminController extends Controller
             if (!empty($validator) && $validator->fails()) {
                return back()->withErrors($validator); //check and edit lai back()
             }else {
-                echo ' done';
+                $post       = new Post;
+                $postmeta   = new Postmeta;
+
+                if ($request->txtPostalias) {
+                    $alias   =  MainHelper::createAlias($request->txtPostalias);
+                }else {
+                    $alias   =  MainHelper::createAlias($request->txtPostname);
+                }
+
+                if ($post->post_name) {
+                    $status = 'publish';
+                }
+
+                $post->post_name    = $request->txtPostname;
+                $post->post_alias   = $alias;
+                $post->post_content = $request->txtPostcontent;
+                $post->post_status  = $status;
+                $post->user_id      = Auth::user()->id;
+
+                $postmeta->post_id      = 
+                $postmeta->meta_key     =
+                $postmeta->meta_value     =
             }
         }else {
             return view('backend.post.add');

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,6 +12,6 @@ class Category extends Model
 	public $timestamps = false;
 
 	public function posts(){
-		return $this->belongsToMany('App\models\Post', 'cate_post', 'cate_id', 'post_id');
+		return $this->belongsToMany('App\Models\Post', 'cate_post', 'cate_id', 'post_id');
 	}
 }

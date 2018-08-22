@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\models\Category;
+use App\Models\Category;
 
 class AdminRequest extends FormRequest
 {

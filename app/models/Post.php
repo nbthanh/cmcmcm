@@ -1,6 +1,6 @@
 <?php
 
-namespace App\models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,10 +12,14 @@ class Post extends Model
 	public $timestamps = true;
 
 	public function postmeta(){
-		return $this->hasMany('App\models\Postmeta','post_id','id');
+		return $this->hasMany('App\Models\Postmeta','post_id','id');
 	}
 
-	public function user(){
-		return $this->belongsTo('App\models\User','user_id');
+	public function users(){
+		return $this->belongsTo('App\Models\User','user_id');
+	}
+
+	public function categories(){
+		return $this->belongsToMany('App\Models\Category','cate_post','cate_id','post_id');
 	}
 }
